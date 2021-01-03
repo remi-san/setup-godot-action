@@ -1,0 +1,27 @@
+name: 'Godot Setup'
+description: 'Setup godot to use it afterwards'
+author: remi-san
+inputs:
+  godot-version:
+    description: 'Which Godot version to use'
+    required: true
+  release-name:
+    description: 'Which release is it? stable|alpha|beta|RC'
+    required: false
+    default: 'stable'
+  mono:
+    description: 'Set to true if you want the mono version'
+    required: false
+    default: 'false'
+  export-templates:
+    description: 'Set to true if you want the import templates'
+    required: false
+    default: 'false'
+runs:
+  using: "composite"
+  steps: 
+    - run: ${{ github.action_path }}/install.sh ${{ inputs.godot-version }} ${{ inputs.release-name }} {{ inputs.mono }} {{ inputs.export-templates}}
+      shell: bash
+branding:
+  icon: loader
+  color: blue
